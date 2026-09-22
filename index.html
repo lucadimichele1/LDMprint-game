@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>LDMcraft — il gioco di LDMprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="game">
+  <div id="hud" class="hidden">
+    <div id="leftcol">
+    <div id="money" class="hudbox">
+      <div class="heroname">👤 Luca · LDMprint</div>
+      <div class="row1"><div class="coin"></div><span id="ldm">0</span><span>LDM</span></div>
+      <div class="goal"><div id="goalbar"></div></div>
+      <div id="goaltxt">Traguardo: 1.000.000.000 LDM</div>
+      <div id="clocktxt"></div>
+      <div id="filtxt"></div>
+    </div>
+    <div id="timers"></div>
+    <div id="event" class="hudbox hidden"></div>
+    <div id="printers" class="hudbox"></div>
+    </div>
+    <div id="objective" class="hudbox">
+      <div id="arrow"><svg viewBox="0 0 16 16"><path d="M8 1 L14 9 H10 V15 H6 V9 H2 Z" fill="#ff8a1f" stroke="#000" stroke-width="1"/></svg></div>
+      <div><div id="objlbl">Obiettivo</div><div id="objtxt">—</div></div>
+      <div id="objdist"></div>
+    </div>
+    <div id="orders" class="hudbox"><div class="hud-t">Ordini <span id="rep"></span></div><div id="orderlist"></div></div>
+    <div id="prompt" class="hidden"></div>
+    <div id="hotbar"></div>
+    <div id="toasts"></div>
+    <div id="help-hint"><kbd>C</kbd> telefono · <kbd>G</kbd> guida · <kbd>P</kbd> pausa · <kbd>M</kbd> audio</div>
+    <button id="pausebtn" class="mc-btn" aria-label="Pausa">II</button>
+    <button id="phonebtn" class="mc-btn" aria-label="Telefono">📱</button>
+  </div>
+  <div id="touch" class="hidden">
+    <div id="joy"><div id="joyk"></div></div>
+    <button id="tJ" class="mc-btn">SALTA</button>
+    <button id="tE" class="mc-btn">E</button>
+  </div>
+  <div id="okcheck" class="hidden" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#22b14c" stroke="#0d5c24" stroke-width="4"/><path d="M28 52 L44 67 L73 36" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div id="shiftPrompt" class="hidden" role="dialog" aria-modal="true"></div>
+  <div id="pause" class="hidden" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+    <div class="mc-panel pause-box">
+      <h2 id="pauseTitle">PAUSA</h2>
+      <p>Il tempo è fermo: stampe, ordini ed etichette ripartono quando riprendi.</p>
+      <div id="pauseMain">
+      <div class="pause-stats" id="pauseStats"></div>
+      <div class="pause-btns">
+        <button class="mc-btn go" id="pResume">Riprendi <kbd>P</kbd></button>
+        <button class="mc-btn hidden" id="pSkip">🌙 Salta alla prossima apertura</button>
+        <button class="mc-btn" id="pSave">💾 Salva con nome</button>
+        <button class="mc-btn" id="pAudio">Audio: attivo</button>
+        <button class="mc-btn" id="pMusic">Musica: attiva</button>
+        <button class="mc-btn" id="pMenu">Torna al menu</button>
+      </div>
+      </div>
+      <div id="savePanel" class="hidden"></div>
+    </div>
+  </div>
+  <div id="modal" class="hidden"><div class="mc-panel" id="modalbox" role="dialog" aria-modal="true"></div></div>
+  <div id="start">
+    <div class="start-card">
+      <img id="startlogo" alt="Logo LDMprint">
+      <h1 class="logo">LDM<em>craft</em></h1>
+      <div class="splash">Stampa 3D!</div>
+      <div id="startMain">
+      <p>Sei <b>Luca</b>, fondatore di LDMprint. Trova progetti, stampali in 3D, vendili e spedisci gli ordini. Traguardo: 1.000.000.000 LDM.</p>
+      <div class="start-btns">
+        <button class="mc-btn go" id="btnContinue">Continua partita</button>
+        <button class="mc-btn" id="btnLoad">Carica partita</button>
+        <button class="mc-btn" id="btnNew">Nuova partita</button>
+      </div>
+      </div>
+      <div id="loadPanel" class="hidden mc-panel"></div>
+      <div class="start-keys"><kbd>W A S D</kbd> muoviti · <kbd>E</kbd> interagisci · <kbd>P</kbd> pausa · trascina il mouse per ruotare la visuale</div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/01-config.js"></script>
+<script src="js/02-renderer.js"></script>
+<script src="js/03-logo.js"></script>
+<script src="js/04-mondo.js"></script>
+<script src="js/05-edifici.js"></script>
+<script src="js/06-macchine.js"></script>
+<script src="js/07-persone.js"></script>
+<script src="js/08-animali.js"></script>
+<script src="js/10-stato.js"></script>
+<script src="js/11-azioni.js"></script>
+<script src="js/12-interfaccia.js"></script>
+<script src="js/13-hud-input.js"></script>
+<script src="js/14-loop.js"></script>
+<script src="js/15-staff.js"></script>
+<script src="js/16-codici-animali.js"></script>
+<script src="js/17-logistica-economia.js"></script>
+<script src="js/18-salvataggi-audio.js"></script>
+<script src="js/19-avvio.js"></script>
+</body>
+</html>
